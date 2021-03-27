@@ -25,8 +25,11 @@ In the next run the code will not be executed if it was not changed. If the code
 
 ```python
 from xontrib.macro_lib.run_once import RunOnce
-with! RunOnce('Just echo') as _r:
-    echo 123
+with! RunOnce('First install') as _r:
+    if $(which pacman):
+        pacman -S vim htop
+    elif $(which apt):
+        apt update && apt install -y vim htop
 ```
 
 ### RunInXonshDocker
