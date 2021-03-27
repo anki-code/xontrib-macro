@@ -23,8 +23,10 @@ xpip install xontrib-macro-lib
 Run the code once and save mark about it in [XONSH_DATA_DIR](https://xon.sh/envvars.html#xonsh-data-dir). 
 In the next run the code will not be executed if it was not changed. If the code will be changed it will be executed again.
 
+Example:
 ```python
 from xontrib.macro_lib.run_once import RunOnce
+
 with! RunOnce('First install') as _r:
     if $(which pacman):
         pacman -S vim htop
@@ -36,6 +38,7 @@ with! RunOnce('First install') as _r:
 
 ```python
 from xontrib.macro_lib.docker import RunInXonshDocker as Doxer
+
 with! Doxer() as _d:
    pip install lolcat
    echo "We're in docker container now!" | lolcat
