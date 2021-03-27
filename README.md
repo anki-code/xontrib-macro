@@ -46,7 +46,7 @@ with! Doxer() as _d:
 
 This is the same as:
 ```python
-docker run -it --rm xonsh/xonsh:slim xonsh -c 'pip install lolcat\necho "We are in docker container now!"'
+docker run -it --rm xonsh/xonsh:slim xonsh -c 'pip install lolcat\necho "We are in docker container now!" | lolcat'
 ```
 
 ## Credits
