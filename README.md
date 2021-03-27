@@ -16,7 +16,7 @@ xpip install xontrib-macro-lib
 # or: xpip install -U git+https://github.com/anki-code/xontrib-macro-lib
 ```
 
-## Usage
+## Macro list
 
 ### RunOnce
 
