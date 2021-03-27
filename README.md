@@ -49,6 +49,10 @@ This is the same as:
 docker run -it --rm xonsh/xonsh:slim xonsh -c 'pip install lolcat\necho "We are in docker container now!" | lolcat'
 ```
 
+## Known issues
+
+Context Manager Macros pick up comments from outside the block ([4207](https://github.com/xonsh/xonsh/issues/4207)). We can fix it in the xontrib by checking the indentation in the beginning line and the end line. PR is welcome!
+
 ## Credits
 
 This package was created with [xontrib cookiecutter template](https://github.com/xonsh/xontrib-cookiecutter).
