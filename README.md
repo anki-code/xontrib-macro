@@ -1,5 +1,5 @@
 <p align="center">
-Library of the useful macroses for the <a href="https://xon.sh/">xonsh shell</a>.
+Library of the useful <a href="https://xon.sh/tutorial_macros.html">macroses</a> for the <a href="https://xon.sh/">xonsh shell</a>.
 </p>
 
 <p align="center">  
