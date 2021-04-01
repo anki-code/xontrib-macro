@@ -63,6 +63,20 @@ j['hello']
 # 'world'
 ```
 
+### Block (xonsh builtin)
+```python
+from xonsh.contexts import Block
+with! Block() as b:
+    qwe
+    asd
+    zxc
+
+b.macro_block
+# 'qwe\nasd\nzxc\n\n'
+b.lines
+# ['qwe', 'asd', 'zxc', '']
+```
+
 ## Known issues
 
 Context Manager Macros pick up comments from outside the block ([4207](https://github.com/xonsh/xonsh/issues/4207)). We can fix it in the xontrib by checking the indentation in the beginning line and the end line. PR is welcome!
