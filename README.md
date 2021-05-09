@@ -40,14 +40,14 @@ with! RunOnce('First install') as _r:
 from xontrib.macro_lib.docker import RunInXonshDocker as Doxer
 
 with! Doxer() as _d:
-   pip install -U -q lolcat
+   pip install -U -q pip lolcat
    echo "We are in docker container now!" | lolcat
 ```
 
 This is the same as:
 ```python
 docker run -it --rm xonsh/xonsh:slim xonsh -c @("""
-pip install -U -q lolcat
+pip install -U -q pip lolcat
 echo "We are in docker container now!" | lolcat
 """)
 ```
