@@ -27,7 +27,7 @@ Example:
 ```python
 from xontrib.macro_lib.run_once import RunOnce
 
-with! RunOnce('First install') as _r:
+with! RunOnce('First install'):
     if $(which pacman):
         pacman -S vim htop
     elif $(which apt):
@@ -39,7 +39,7 @@ with! RunOnce('First install') as _r:
 ```python
 from xontrib.macro_lib.docker import RunInXonshDocker as Doxer
 
-with! Doxer() as _d:
+with! Doxer():
    pip install -U -q pip lolcat
    echo "We are in docker container now!" | lolcat
 ```
