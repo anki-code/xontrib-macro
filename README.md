@@ -34,14 +34,28 @@ with! RunOnce('First install'):
         apt update && apt install -y vim htop
 ```
 
+### RunInDocker
+
+```xsh
+from xontrib.macro_lib.docker import RunInDocker as docker
+
+with! docker():  # default: image='ubuntu', executor='bash'
+    echo hello
+
+# hello
+```
+
 ### RunInXonshDocker
 
 ```python
 from xontrib.macro_lib.docker import RunInXonshDocker as Doxer
 
-with! Doxer():
+with! Doxer():  # default: image='xonsh/xonsh:slim', executor='/usr/local/bin/xonsh'
+   echo Installing...
    pip install -U -q pip lolcat
    echo "We are in docker container now!" | lolcat
+   
+# We are in docker container now! (colorized)
 ```
 
 This is the same as:
