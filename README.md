@@ -94,6 +94,16 @@ b.lines
 # ['qwe', 'asd', 'zxc', '']
 ```
 
+## Tricks
+
+### One-liner
+
+If you want to have just one line without additional line with import this also works:
+```python
+with! __import__('xontrib').macro_lib.run_once.RunOnce():
+      echo Hello just one time!
+```
+
 ## Known issues
 
 Context Manager Macros pick up comments from outside the block ([4207](https://github.com/xonsh/xonsh/issues/4207)). We can fix it in the xontrib by checking the indentation in the beginning line and the end line. PR is welcome!
