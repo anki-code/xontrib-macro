@@ -18,6 +18,55 @@ xpip install xontrib-macro-lib
 
 ## Macro list
 
+### Block (xonsh builtin)
+```python
+from xonsh.contexts import Block
+with! Block() as b:
+    qwe
+    asd
+    zxc
+
+b.macro_block
+# 'qwe\nasd\nzxc\n\n'
+b.lines
+# ['qwe', 'asd', 'zxc', '']
+```
+
+### Write
+
+Write a file from block:
+
+```xsh
+from xontrib.macro_lib.data import Write
+
+with! Write('/tmp/path/to/hello.xsh', chmod=0o600, exec='u', replace=True, makedir=True, verbose=True):
+    echo world
+    
+## Make directories: /tmp/path/to
+## Write to file: /tmp/path/to/hello.xsh
+## Set chmod: rw- --- ---
+## Set exec:  rwx --- ---
+
+/tmp/path/to/hello.xsh
+# world
+```
+
+Note! There is an upstream issue described below in "Known issues" section - the first lines that begin from `#` will be ignored in the block. As workaround to create [shebang](https://en.wikipedia.org/wiki/Shebang_(Unix)) use `Write(..., shebang="#!/bin/xonsh")`.
+
+### JsonBlock
+
+Make json block and use it as dict:
+
+```python
+from xontrib.macro_lib.data import JsonBlock
+
+with! JsonBlock() as j:
+    {"hello": "world"}
+
+j['hello']
+# 'world'
+```
+
 ### RunOnce
 
 Run the code once and save mark about it in [XONSH_DATA_DIR](https://xon.sh/envvars.html#xonsh-data-dir). 
@@ -66,37 +115,9 @@ echo "We are in docker container now!" | lolcat
 """)
 ```
 
-### JsonBlock
-
-```python
-from xontrib.macro_lib.data import JsonBlock
-
-with! JsonBlock() as j:
-    {
-        "hello": "world"
-    }
-
-j['hello']
-# 'world'
-```
-
-### Block (xonsh builtin)
-```python
-from xonsh.contexts import Block
-with! Block() as b:
-    qwe
-    asd
-    zxc
-
-b.macro_block
-# 'qwe\nasd\nzxc\n\n'
-b.lines
-# ['qwe', 'asd', 'zxc', '']
-```
-
 ## Known issues
 
-Context Manager Macros pick up comments from outside the block ([4207](https://github.com/xonsh/xonsh/issues/4207)). We can fix it in the xontrib by checking the indentation in the beginning line and the end line. PR is welcome!
+Context Manager Macro picks up comments from outside the block and ignore the initial comments in the block ([4207](https://github.com/xonsh/xonsh/issues/4207)). We can fix it in the xontrib by checking the indentation in the beginning line and the end line. PR is welcome!
 
 ## Credits
 
