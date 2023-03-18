@@ -9,7 +9,7 @@ from pathlib import Path
 from xonsh.contexts import Block
 
 @dataclass
-class Write(Block):
+class write(Block):
     """Macro block class to write a file."""
 
     filepath: str           # Path to file.
@@ -17,11 +17,11 @@ class Write(Block):
     makedir: bool = False   # Force create missing directories in path.
     replace: bool = False   # Replace if the file exists.
     chmod: int = None       # Set file permissions. Doc: https://docs.python.org/3/library/pathlib.html#pathlib.Path.chmod
-    exec: str = None        # Set execute to 'a' (all), 'u' (user), 'g' (group), 'o' (others). Can be 'uo' and the same as `chmod uo+x file`.
+    exec: str = None        # Set execute rights to 'u' (user), 'g' (group), 'o' (others). Can be 'uo' (user+others) and the same as `chmod uo+x file`.
     user: str = None        # Set user for a file.
     group: str = None       # Set group for a file.
     verbose: bool = False   # Print info about actions.
-    shebang: bool = False
+    shebang: str = None     # Put here the shebang. It's workaround for https://github.com/xonsh/xonsh/issues/4207
 
     def log(self, msg):
         if self.verbose:
@@ -33,8 +33,12 @@ class Write(Block):
     def __enter__(self):
         fp = Path(self.filepath)
 
-        if not self.replace and fp.exists():
-            raise Exception(f'File exists: {fp}')
+        if fp.exists():
+            if self.replace:
+                self.log(f'Remove file before writing: {fp}')
+                fp.unlink()
+            else:
+                raise Exception(f'File exists: {fp}')
 
         if self.makedir and not fp.parent.exists():
             self.log(f'Make directories: {fp.parent}')
@@ -42,7 +46,7 @@ class Write(Block):
 
         self.log(f'Write to file: {fp}')
         with open(fp, self.mode) as f:
-            f.write(self.macro_block.strip()+'\n')
+            f.write((self.shebang.strip() + '\n' if self.shebang is not None else '') + self.macro_block.strip() + '\n')
 
         if self.chmod is not None:
             self.log(f'Set chmod: {self.nice_st_mode(self.chmod)}')
@@ -68,7 +72,6 @@ class Write(Block):
         if self.group:
             self.log(f'Set group: {self.group}')
             shutil.chown(self.filepath, group=self.group)
-
 
     def __exit__(self, *exc):
         del self.macro_block, self.macro_globals, self.macro_locals
