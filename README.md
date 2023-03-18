@@ -16,6 +16,22 @@ xpip install xontrib-macro-lib
 # or: xpip install -U git+https://github.com/anki-code/xontrib-macro-lib
 ```
 
+## Usage
+
+By loading the whole module - recommended for interactive usage (type `macrolib.<Tab>`): 
+```xsh
+xontrib load macrolib
+with! macrolib.data.Write('/tmp/hello'):
+    world
+```
+
+By importing certain macro - recommended for scripts:
+```xsh
+from xontrib.macrolib.data import Write
+with! Write('/tmp/hello'):
+    world
+```
+
 ## Macro list
 
 ### Block (xonsh builtin)
