@@ -49,7 +49,7 @@ b.lines
 # ['any', 'text', 'here', '']
 ```
 
-### Write
+### data.Write
 
 Write a file from block ([rich list of parameters](https://github.com/anki-code/xontrib-macro-lib/blob/main/xontrib/macrolib/data.py#L12)):
 
@@ -67,11 +67,11 @@ with! Write('/tmp/t/hello.xsh', chmod=0o600, exec='u', replace=True, makedir=Tru
 /tmp/t/hello.xsh
 # world
 ```
-There is also `Replace()` macro with `mode='w', replace=True, makedir=True, replace_keep='a'`.
+There is also `data.Replace()` macro with `mode='w', replace=True, makedir=True, replace_keep='a'`.
 
 Note! There is an upstream issue described below in "Known issues" section - the first lines that begin from `#` will be ignored in the block. As workaround to create [shebang](https://en.wikipedia.org/wiki/Shebang_(Unix)) use `Write(..., shebang="#!/bin/xonsh")`.
 
-### JsonBlock
+### data.JsonBlock
 
 Make json block and use it as dict:
 
@@ -85,7 +85,7 @@ j['hello']
 # 'world'
 ```
 
-### Run Once
+### run.Once
 
 Run the code once and save mark about it in [XONSH_DATA_DIR](https://xon.sh/envvars.html#xonsh-data-dir). 
 In the next run the code will not be executed if it was not changed. If the code will be changed it will be executed again.
@@ -101,7 +101,7 @@ with! Once('First install'):
         apt update && apt install -y vim htop
 ```
 
-### RunInDocker
+### docker.RunInDocker
 
 ```xsh
 from xontrib.macrolib.docker import RunInDocker as docker
@@ -112,7 +112,7 @@ with! docker():  # default: image='ubuntu', executor='bash'
 # hello
 ```
 
-### RunInXonshDocker
+### docker.RunInXonshDocker
 
 ```python
 from xontrib.macrolib.docker import RunInXonshDocker as Doxer
