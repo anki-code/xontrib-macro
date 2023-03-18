@@ -9,7 +9,7 @@ from pathlib import Path
 from xonsh.contexts import Block
 
 @dataclass
-class write(Block):
+class Write(Block):
     """Macro block class to write a file."""
 
     filepath: str           # Path to file.
