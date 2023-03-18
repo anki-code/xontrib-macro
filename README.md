@@ -51,7 +51,7 @@ b.lines
 
 ### Write
 
-Write a file from block ([rich list of parameters](https://github.com/anki-code/xontrib-macro-lib/blob/main/xontrib/macrolib/data.py)):
+Write a file from block ([rich list of parameters](https://github.com/anki-code/xontrib-macro-lib/blob/main/xontrib/macrolib/data.py#L12)):
 
 ```xsh
 from xontrib.macrolib.data import Write
