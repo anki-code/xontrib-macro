@@ -21,6 +21,7 @@ xpip install xontrib-macro-lib
 ### Block (xonsh builtin)
 ```python
 from xonsh.contexts import Block
+
 with! Block() as b:
     any
     text
