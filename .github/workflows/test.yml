@@ -1,0 +1,12 @@
+name: Testing
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  testing:
+    # reuse workflow definitions
+    uses: xonsh/actions/.github/workflows/test-pip-xontrib.yml@main
+    with:
+      cache-dependency-path: pyproject.toml
