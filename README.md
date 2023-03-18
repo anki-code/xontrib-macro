@@ -12,8 +12,8 @@ If you like the idea click ⭐ on the repo and <a href="https://twitter.com/inte
 To install use pip:
 
 ```bash
-xpip install xontrib-macrolib
-# or: xpip install -U git+https://github.com/anki-code/xontrib-macrolib
+xpip install xontrib-macro-lib
+# or: xpip install -U git+https://github.com/anki-code/xontrib-macro-lib
 ```
 
 ## Macro list
