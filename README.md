@@ -40,15 +40,15 @@ Write a file from block:
 ```xsh
 from xontrib.macrolib.data import Write
 
-with! Write('/tmp/path/to/hello.xsh', chmod=0o600, exec='u', replace=True, makedir=True, verbose=True):
+with! Write('/tmp/t/hello.xsh', chmod=0o600, exec='u', replace=True, makedir=True, verbose=True):
     echo world
     
-## Make directories: /tmp/path/to
-## Write to file: /tmp/path/to/hello.xsh
+## Make directories: /tmp/t
+## Write to file: /tmp/t/hello.xsh
 ## Set chmod: rw- --- ---
 ## Set exec:  rwx --- ---
 
-/tmp/path/to/hello.xsh
+/tmp/t/hello.xsh
 # world
 ```
 
