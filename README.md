@@ -22,14 +22,14 @@ xpip install xontrib-macro-lib
 ```python
 from xonsh.contexts import Block
 with! Block() as b:
-    qwe
-    asd
-    zxc
+    any
+    text
+    here
 
 b.macro_block
-# 'qwe\nasd\nzxc\n\n'
+# 'any\ntext\nhere\n\n'
 b.lines
-# ['qwe', 'asd', 'zxc', '']
+# ['any', 'text', 'here', '']
 ```
 
 ### Write
