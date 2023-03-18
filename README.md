@@ -68,16 +68,16 @@ j['hello']
 # 'world'
 ```
 
-### RunOnce
+### Run Once
 
 Run the code once and save mark about it in [XONSH_DATA_DIR](https://xon.sh/envvars.html#xonsh-data-dir). 
 In the next run the code will not be executed if it was not changed. If the code will be changed it will be executed again.
 
 Example:
 ```python
-from xontrib.macrolib.run_once import RunOnce
+from xontrib.macrolib.run import Once
 
-with! RunOnce('First install'):
+with! Once('First install'):
     if $(which pacman):
         pacman -S vim htop
     elif $(which apt):
