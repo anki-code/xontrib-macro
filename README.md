@@ -12,8 +12,8 @@ If you like the idea click ⭐ on the repo and <a href="https://twitter.com/inte
 To install use pip:
 
 ```bash
-xpip install xontrib-macro-lib
-# or: xpip install -U git+https://github.com/anki-code/xontrib-macro-lib
+xpip install xontrib-macrolib
+# or: xpip install -U git+https://github.com/anki-code/xontrib-macrolib
 ```
 
 ## Macro list
@@ -38,7 +38,7 @@ b.lines
 Write a file from block:
 
 ```xsh
-from xontrib.macro_lib.data import Write
+from xontrib.macrolib.data import Write
 
 with! Write('/tmp/path/to/hello.xsh', chmod=0o600, exec='u', replace=True, makedir=True, verbose=True):
     echo world
@@ -59,7 +59,7 @@ Note! There is an upstream issue described below in "Known issues" section - the
 Make json block and use it as dict:
 
 ```python
-from xontrib.macro_lib.data import JsonBlock
+from xontrib.macrolib.data import JsonBlock
 
 with! JsonBlock() as j:
     {"hello": "world"}
@@ -75,7 +75,7 @@ In the next run the code will not be executed if it was not changed. If the code
 
 Example:
 ```python
-from xontrib.macro_lib.run_once import RunOnce
+from xontrib.macrolib.run_once import RunOnce
 
 with! RunOnce('First install'):
     if $(which pacman):
@@ -87,7 +87,7 @@ with! RunOnce('First install'):
 ### RunInDocker
 
 ```xsh
-from xontrib.macro_lib.docker import RunInDocker as docker
+from xontrib.macrolib.docker import RunInDocker as docker
 
 with! docker():  # default: image='ubuntu', executor='bash'
     echo hello
@@ -98,7 +98,7 @@ with! docker():  # default: image='ubuntu', executor='bash'
 ### RunInXonshDocker
 
 ```python
-from xontrib.macro_lib.docker import RunInXonshDocker as Doxer
+from xontrib.macrolib.docker import RunInXonshDocker as Doxer
 
 with! Doxer():  # default: image='xonsh/xonsh:slim', executor='/usr/local/bin/xonsh'
    echo Installing...
