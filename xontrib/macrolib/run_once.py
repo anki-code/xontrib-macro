@@ -4,7 +4,7 @@ from xonsh.contexts import Block
 from hashlib import md5
 from pathlib import Path
 
-class RunOnce(Block):
+class Once(Block):
     """Run xonsh codeblock only once and save the mark about it to the $XONSH_DATA_DIR."""
 
     def __init__(self, name='', print_done=False):
