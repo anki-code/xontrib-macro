@@ -105,6 +105,7 @@ class Replace(Write):
     mode: str = 'w'
     replace: bool = True
     makedir: bool = True
+    replace_keep: str = 'a'
 
 
 class JsonBlock(Block):
