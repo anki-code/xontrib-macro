@@ -8,7 +8,7 @@ except (IOError, OSError):
     long_description = ''
 
 setuptools.setup(
-    name='xontrib-macro-lib',
+    name='xontrib-macrolib',
     version='0.0.4',
     license='MIT',
     author='anki-code',
@@ -22,11 +22,11 @@ setuptools.setup(
     package_dir={'xontrib': 'xontrib'},
     package_data={'xontrib': ['*.py']},
     platforms='any',
-    url='https://github.com/anki-code/xontrib-macro-lib',
+    url='https://github.com/anki-code/xontrib-macrolib',
     project_urls={
-        "Documentation": "https://github.com/anki-code/xontrib-macro-lib/blob/master/README.md",
-        "Code": "https://github.com/anki-code/xontrib-macro-lib",
-        "Issue tracker": "https://github.com/anki-code/xontrib-macro-lib/issues",
+        "Documentation": "https://github.com/anki-code/xontrib-macrolib/blob/master/README.md",
+        "Code": "https://github.com/anki-code/xontrib-macrolib",
+        "Issue tracker": "https://github.com/anki-code/xontrib-macrolib/issues",
     },
     classifiers=[
         "Programming Language :: Python :: 3",
