@@ -12,16 +12,17 @@ from xonsh.contexts import Block
 class Write(Block):
     """Macro block class to write a file."""
 
-    filepath: str           # Path to file.
-    mode: str = 'w'         # Open mode: 'w' (write), 'a' (append). Doc: https://docs.python.org/3/tutorial/inputoutput.html#reading-and-writing-files
-    makedir: bool = False   # Force create missing directories in path.
-    replace: bool = False   # Replace if the file exists.
-    chmod: int = None       # Set file permissions. Doc: https://docs.python.org/3/library/pathlib.html#pathlib.Path.chmod
-    exec: str = None        # Set execute rights to 'u' (user), 'g' (group), 'o' (others). Can be 'uo' (user+others) and the same as `chmod uo+x file`.
-    user: str = None        # Set user for a file.
-    group: str = None       # Set group for a file.
-    verbose: bool = False   # Print info about actions.
-    shebang: str = None     # Put here the shebang. It's workaround for https://github.com/xonsh/xonsh/issues/4207
+    filepath: str              # Path to file.
+    mode: str = 'w'            # Open mode: 'w' (write), 'a' (append). Doc: https://docs.python.org/3/tutorial/inputoutput.html#reading-and-writing-files
+    makedir: bool = False      # Force create missing directories in path.
+    replace: bool = False      # Replace if the file exists.
+    replace_keep: str = None   # Keep after replace: 'm' (chmod), 'u' (user), 'g' (group), 'a' (all). Allowed mix: 'mu'.
+    chmod: int = None          # Set file permissions i.e `0o644`. Doc: https://docs.python.org/3/library/pathlib.html#pathlib.Path.chmod
+    exec: str = None           # Set execute rights to 'u' (user), 'g' (group), 'o' (others). Can be 'uo' (user+others) and the same as `chmod uo+x file`.
+    user: str = None           # Set user for a file.
+    group: str = None          # Set group for a file.
+    verbose: bool = False      # Print info about actions.
+    shebang: str = None        # Put here the shebang. It's workaround for https://github.com/xonsh/xonsh/issues/4207
 
     def log(self, msg):
         if self.verbose:
@@ -35,9 +36,14 @@ class Write(Block):
     def __enter__(self):
         fp = Path(self.filepath)
 
+        replaced, prev_st_mode, prev_user, prev_group = False, None, None, None
         if fp.exists():
             if self.replace:
+                if self.replace_keep and (self.chmod or self.exec or self.user or self.group):
+                    self.log('File will be replaced using `replace_keep` strategy then `chmod`, `exec`, `user` or `group` will be set as requested.')
+
                 self.log(f'Remove file before writing: {fp}')
+                replaced, prev_st_mode, prev_user, prev_group = True, fp.stat().st_mode, fp.owner(), fp.group()
                 fp.unlink()
             else:
                 raise Exception(f'File exists: {fp}')
@@ -46,12 +52,27 @@ class Write(Block):
             self.log(f'Make directories: {fp.parent}')
             fp.parent.mkdir(parents=True)
 
+
         self.log(f'Write to file: {fp}')
         with open(fp, self.mode) as f:
             f.write((self.shebang.strip() + '\n' if self.shebang is not None else '') + self.macro_block.strip()+'\n')
 
+
+        if self.replace_keep in ['m', 'a']:
+            self.log(f'Keep mode: {self.nice_st_mode(prev_st_mode)}')
+            fp.chmod(prev_st_mode)
+
+        if self.replace_keep in ['u', 'a']:
+            self.log(f'Keep user: {prev_user}')
+            shutil.chown(self.filepath, user=prev_user)
+
+        if self.replace_keep in ['g', 'a']:
+            self.log(f'Keep group: {prev_group}')
+            shutil.chown(self.filepath, group=prev_group)
+
+
         if self.chmod is not None:
-            self.log(f'Set chmod: {self.nice_st_mode(self.chmod)}')
+            self.log(f'Set mode: {self.nice_st_mode(self.chmod)}')
             fp.chmod(self.chmod)
 
         if self.exec is not None:
@@ -78,7 +99,14 @@ class Write(Block):
     def __exit__(self, *exc):
         del self.macro_block, self.macro_globals, self.macro_locals
 
-        
+@dataclass
+class Replace(Write):
+    """Macro block class to force replace the file."""
+    mode: str = 'w'
+    replace: bool = True
+    makedir: bool = True
+
+
 class JsonBlock(Block):
     """Macro block class to read json."""
     __xonsh_block__ = str
