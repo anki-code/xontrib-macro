@@ -67,6 +67,7 @@ with! Write('/tmp/t/hello.xsh', chmod=0o600, exec='u', replace=True, makedir=Tru
 /tmp/t/hello.xsh
 # world
 ```
+There is also `Replace()` macro with `mode='w', replace=True, makedir=True, replace_keep='a'`.
 
 Note! There is an upstream issue described below in "Known issues" section - the first lines that begin from `#` will be ignored in the block. As workaround to create [shebang](https://en.wikipedia.org/wiki/Shebang_(Unix)) use `Write(..., shebang="#!/bin/xonsh")`.
 
