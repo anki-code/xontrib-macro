@@ -9,7 +9,7 @@ from pathlib import Path
 from xonsh.contexts import Block
 
 @dataclass
-class write(Block):
+class Write(Block):
     """Macro block class to write a file."""
 
     filepath: str           # Path to file.
@@ -27,7 +27,9 @@ class write(Block):
         if self.verbose:
             print(msg, file=sys.stderr)
 
-    def nice_st_mode(self, st_mode):
+    @staticmethod
+    def nice_st_mode(st_mode):
+        """Return st_mode as space delimited text i.e. `nice_st_mode(0o644)` -> 'rw- r-- r--'"""
         return ' '.join(list(map(''.join, zip(*[iter(stat.filemode(st_mode)[1:])]*3))))
 
     def __enter__(self):
@@ -46,7 +48,7 @@ class write(Block):
 
         self.log(f'Write to file: {fp}')
         with open(fp, self.mode) as f:
-            f.write((self.shebang.strip() + '\n' if self.shebang is not None else '') + self.macro_block.strip() + '\n')
+            f.write((self.shebang.strip() + '\n' if self.shebang is not None else '') + self.macro_block.strip()+'\n')
 
         if self.chmod is not None:
             self.log(f'Set chmod: {self.nice_st_mode(self.chmod)}')
@@ -76,7 +78,7 @@ class write(Block):
     def __exit__(self, *exc):
         del self.macro_block, self.macro_globals, self.macro_locals
 
-
+        
 class JsonBlock(Block):
     """Macro block class to read json."""
     __xonsh_block__ = str
