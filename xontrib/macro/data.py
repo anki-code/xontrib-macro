@@ -117,3 +117,23 @@ class JsonBlock(Block):
 
     def __exit__(self, *exc):
         del self.macro_block, self.macro_globals, self.macro_locals
+
+        
+# Source: https://xon.sh/tutorial_macros.html#context-manager-macros
+import xml.etree.ElementTree as ET
+class XmlBlock:
+    """Macro block class to read XML."""
+    
+    # make sure the macro_block comes back as a string
+    __xonsh_block__ = str
+
+    def __enter__(self):
+        # parse and return the block on entry
+        root = ET.fromstring(self.macro_block)
+        return root
+
+    def __exit__(self, *exc):
+        # no reason to keep these attributes around.
+        del self.macro_block, self.macro_globals, self.macro_locals
+        
+        
