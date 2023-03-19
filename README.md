@@ -100,8 +100,12 @@ with! XmlBlock() as tree:
       </body>
     </note>
 
+type(tree)
+# xml.etree.ElementTree.Element
+
 tree.find('body').text
 # '\n    Hello!\n  '
+
 ```
 
 ### run.Once
