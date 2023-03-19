@@ -32,7 +32,7 @@ with! Write('/tmp/hello', replace=True):
     world
 ```
 
-## Macro list
+## Macros
 
 ### Block (xonsh builtin)
 ```python
