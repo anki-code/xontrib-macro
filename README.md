@@ -85,6 +85,25 @@ j['hello']
 # 'world'
 ```
 
+### data.XmlBlock
+
+Simple XML macro context manager from [xonsh macro tutorial](https://xon.sh/tutorial_macros.html#context-manager-macros). This will return the parsed XML tree from a macro block
+
+```xsh
+from xontrib.macro.data import XmlBlock
+
+with! XmlBlock() as tree:
+    <note>
+      <heading>Hello world!</heading>
+      <body>
+        Hello!
+      </body>
+    </note>
+
+tree.find('body').text
+# '\n    Hello!\n  '
+```
+
 ### run.Once
 
 Run the code once and save mark about it in [XONSH_DATA_DIR](https://xon.sh/envvars.html#xonsh-data-dir). 
