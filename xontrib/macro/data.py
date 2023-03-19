@@ -85,7 +85,7 @@ class Write(Block):
                 st_mode |= stat.S_IXGRP
             if 'o' in self.exec:
                 st_mode |= stat.S_IXOTH
-            self.log(f'Set exec:  {self.nice_st_mode(st_mode)}')
+            self.log(f'Set exec: {self.nice_st_mode(st_mode)}')
             os.chmod(self.filepath, st_mode)
 
         if self.user:
