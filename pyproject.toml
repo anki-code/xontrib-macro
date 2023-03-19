@@ -1,7 +1,7 @@
 
 [project]
 name = "xontrib-macro"
-version = "0.3.0"
+version = "0.3.1"
 license = {file = "LICENSE"}
 description = "Library of the useful macroses for the xonsh shell."
 classifiers = [
