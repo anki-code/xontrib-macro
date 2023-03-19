@@ -17,7 +17,7 @@ class RunInDocker(Block):
 
     def __exit__(self, *a, **kw):
         cmd = f"docker run -it --rm {self.docker_image} {self.docker_executor} -c {repr(self.macro_block)}"
-        __xonsh__.builtins.execx(cmd, 'exec', __xonsh__.ctx, filename='xontrib-macro-lib-docker-run-in-docker')
+        __xonsh__.builtins.execx(cmd, 'exec', __xonsh__.ctx, filename='xontrib-macro-docker-run-in-docker')
 
     
 

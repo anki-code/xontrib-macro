@@ -3,7 +3,7 @@ Library of the useful <a href="https://xon.sh/tutorial_macros.html">macros</a> f
 </p>
 
 <p align="center">  
-If you like the idea click ⭐ on the repo and <a href="https://twitter.com/intent/tweet?text=Nice%20xontrib%20for%20the%20xonsh%20shell!&url=https://github.com/anki-code/xontrib-macro-lib" target="_blank">tweet</a>.
+If you like the idea click ⭐ on the repo and <a href="https://twitter.com/intent/tweet?text=Nice%20xontrib%20for%20the%20xonsh%20shell!&url=https://github.com/anki-code/xontrib-macro" target="_blank">tweet</a>.
 </p>
 
 
@@ -12,22 +12,22 @@ If you like the idea click ⭐ on the repo and <a href="https://twitter.com/inte
 To install use pip:
 
 ```bash
-xpip install xontrib-macro-lib
-# or: xpip install -U git+https://github.com/anki-code/xontrib-macro-lib
+xpip install xontrib-macro
+# or: xpip install -U git+https://github.com/anki-code/xontrib-macro
 ```
 
 ## Usage
 
-By loading the whole module - recommended for interactive usage (type `macrolib.<Tab>`): 
+By loading the whole module - recommended for interactive usage (type `macro.<Tab>`): 
 ```xsh
-xontrib load macrolib
-with! macrolib.data.Write('/tmp/hello', replace=True):
+xontrib load macro
+with! macro.data.Write('/tmp/hello', replace=True):
     world
 ```
 
 By importing certain macro - recommended for scripts:
 ```xsh
-from xontrib.macrolib.data import Write
+from xontrib.macro.data import Write
 with! Write('/tmp/hello', replace=True):
     world
 ```
@@ -51,10 +51,10 @@ b.lines
 
 ### data.Write
 
-Write a file from block ([rich list of parameters](https://github.com/anki-code/xontrib-macro-lib/blob/main/xontrib/macrolib/data.py#L12)):
+Write a file from block ([rich list of parameters](https://github.com/anki-code/xontrib-macro/blob/main/xontrib/macro/data.py#L12)):
 
 ```xsh
-from xontrib.macrolib.data import Write
+from xontrib.macro.data import Write
 
 with! Write('/tmp/t/hello.xsh', chmod=0o600, exec='u', replace=True, makedir=True, verbose=True):
     echo world
@@ -76,7 +76,7 @@ Note! There is an upstream issue described below in "Known issues" section - the
 Make json block and use it as dict:
 
 ```python
-from xontrib.macrolib.data import JsonBlock
+from xontrib.macro.data import JsonBlock
 
 with! JsonBlock() as j:
     {"hello": "world"}
@@ -92,7 +92,7 @@ In the next run the code will not be executed if it was not changed. If the code
 
 Example:
 ```python
-from xontrib.macrolib.run import Once
+from xontrib.macro.run import Once
 
 with! Once('First install'):
     if $(which pacman):
@@ -104,7 +104,7 @@ with! Once('First install'):
 ### docker.RunInDocker
 
 ```xsh
-from xontrib.macrolib.docker import RunInDocker as docker
+from xontrib.macro.docker import RunInDocker as docker
 
 with! docker():  # default: image='ubuntu', executor='bash'
     echo hello
@@ -115,7 +115,7 @@ with! docker():  # default: image='ubuntu', executor='bash'
 ### docker.RunInXonshDocker
 
 ```python
-from xontrib.macrolib.docker import RunInXonshDocker as Doxer
+from xontrib.macro.docker import RunInXonshDocker as Doxer
 
 with! Doxer():  # default: image='xonsh/xonsh:slim', executor='/usr/local/bin/xonsh'
    echo Installing...
