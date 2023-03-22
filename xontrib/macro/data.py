@@ -34,7 +34,7 @@ class Write(Block):
         return ' '.join(list(map(''.join, zip(*[iter(stat.filemode(st_mode)[1:])]*3))))
 
     def __enter__(self):
-        fp = Path(self.filepath)
+        fp = Path(self.filepath).expanduser()
 
         replaced, prev_st_mode, prev_user, prev_group = False, None, None, None
         if fp.exists():
