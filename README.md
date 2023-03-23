@@ -21,14 +21,14 @@ xpip install xontrib-macro
 By loading the whole module - recommended for interactive usage (type `macro.<Tab>`): 
 ```xsh
 xontrib load macro
-with! macro.data.Write('/tmp/hello', replace=True):
+with! macro.data.Write('/tmp/hello', replace=True):  # more macros below
     world
 ```
 
 By importing certain macro - recommended for scripts:
 ```xsh
 from xontrib.macro.data import Write
-with! Write('/tmp/hello', replace=True):
+with! Write('/tmp/hello', replace=True):  # more macros below
     world
 ```
 
