@@ -21,6 +21,7 @@ class Write(Block):
     exec: str = None           # Set execute rights to 'u' (user), 'g' (group), 'o' (others). Can be 'uo' (user+others) and the same as `chmod uo+x file`.
     user: str = None           # Set user for a file.
     group: str = None          # Set group for a file.
+    format: dict = None        # Format block text using `str.format(**format)`.
     verbose: bool = False      # Print info about actions.
     shebang: str = None        # Put here the shebang. It's workaround for https://github.com/xonsh/xonsh/issues/4207
 
@@ -55,7 +56,9 @@ class Write(Block):
 
         self.log(f'Write to file: {fp}')
         with open(fp, self.mode) as f:
-            f.write((self.shebang.strip() + '\n' if self.shebang is not None else '') + self.macro_block.strip()+'\n')
+            macro_block = self.macro_block.strip()
+            macro_block = macro_block.format(**self.format) if self.format is not None else macro_block
+            f.write((self.shebang.strip() + '\n' if self.shebang is not None else '') + macro_block + '\n')
 
 
         if self.replace_keep in ['m', 'a']:
