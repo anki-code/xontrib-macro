@@ -56,8 +56,8 @@ Write a file from block ([rich list of parameters](https://github.com/anki-code/
 ```xsh
 from xontrib.macro.data import Write
 
-with! Write('/tmp/t/hello.xsh', chmod=0o600, exec='u', replace=True, makedir=True, verbose=True):
-    echo world
+with! Write('/tmp/t/hello.xsh', chmod=0o700, replace=True, makedir=True, format={'name': 'world'}, verbose=True):
+    echo {name}
     
 ## Make directories: /tmp/t
 ## Write to file: /tmp/t/hello.xsh
