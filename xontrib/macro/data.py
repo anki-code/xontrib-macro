@@ -53,12 +53,20 @@ class Write(Block):
             self.log(f'Make directories: {fp.parent}')
             fp.parent.mkdir(parents=True)
 
+            
+        macro_block = self.macro_block.strip()    
+        if self.format is not None:
+            self.log(f'Format block using {repr(self.format)}')
+            macro_block = macro_block.format(**self.format)
 
+        if self.shebang is not None:
+            shebang = self.shebang.strip()
+            self.log(f'Add shebang: {shebang}')
+            macro_block = shebang + '\n' + macro_block
+            
         self.log(f'Write to file: {fp}')
         with open(fp, self.mode) as f:
-            macro_block = self.macro_block.strip()
-            macro_block = macro_block.format(**self.format) if self.format is not None else macro_block
-            f.write((self.shebang.strip() + '\n' if self.shebang is not None else '') + macro_block + '\n')
+            f.write(macro_block + '\n')
 
 
         if self.replace_keep in ['m', 'a']:
