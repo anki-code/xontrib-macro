@@ -1,4 +1,3 @@
-
 [project]
 name = "xontrib-macro"
 version = "0.3.4"
@@ -17,28 +16,19 @@ dependencies = ["xonsh>=0.12.5"]
 authors = [
     { name = "xontrib-macro", email = "no@no.no" },
 ]
+
 [project.readme]
 file = "README.md"
 content-type = "text/markdown"
 
-
-
-
-
 [project.urls]
-
-Homepage = "https://github.com/xonsh/xontrib-macro"
-Documentation = "https://github.com/xonsh/xontrib-macro/blob/master/README.md"
-Code = "https://github.com/xonsh/xontrib-macro"
-"Issue tracker" = "https://github.com/xonsh/xontrib-macro/issues"
-
-
-
+Homepage = "https://github.com/anki-code/xontrib-macro"
+Documentation = "https://github.com/anki-code/xontrib-macro/blob/master/README.md"
+Code = "https://github.com/anki-code/xontrib-macro"
+"Issue tracker" = "https://github.com/anki-code/xontrib-macro/issues"
 
 [project.optional-dependencies]
 dev = ["pytest>=7.0"]
-
-
 
 [build-system]
 requires = [
@@ -47,18 +37,15 @@ requires = [
     "poetry-core>=1.3.2",
 ]
 build-backend = "setuptools.build_meta"
-[tool.setuptools]
 
+[tool.setuptools]
 packages = ["xontrib.macro"]
 package-dir = {xontrib = "xontrib"}
-
 platforms = ["any"]
 include-package-data = false
+
 [tool.setuptools.package-data]
-
 xontrib = ["*.xsh", "*.py"]
-
-
 
 [tool.isort]
 profile = "black"
